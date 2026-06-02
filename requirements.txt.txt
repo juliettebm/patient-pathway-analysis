@@ -1,0 +1,5 @@
+streamlit
+pandas
+sqlite3
+scipy
+statsmodels
