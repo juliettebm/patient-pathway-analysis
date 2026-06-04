@@ -36,6 +36,8 @@ patient-pathway-analysis/
 │   ├── 2_Pathways.py                  # Healthcare utilisation analysis
 │   ├── 3_Patient_Explorer.py          # Individual patient journey
 │   └── 4_Statistics.py               # Interactive statistical tests
+├── src/
+│   └── db_utils.py                    # Database utility functions
 │
 ├── .gitignore
 ├── requirements.txt
