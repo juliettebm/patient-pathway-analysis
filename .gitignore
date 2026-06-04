@@ -1,0 +1,16 @@
+# ── Données ───────────────────────────────────────────────────────────────────
+# Fichiers Synthea bruts (volumineux / régénérables)
+data/raw/
+
+# Base de données SQLite générée par notebook 01
+*.db
+*.sqlite
+
+# ── Environnement Python ──────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# ── Fichiers système ──────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
