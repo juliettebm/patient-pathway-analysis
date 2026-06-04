@@ -1,5 +1,7 @@
 streamlit
 pandas
-sqlite3
+numpy
 scipy
 statsmodels
+matplotlib
+seaborn
