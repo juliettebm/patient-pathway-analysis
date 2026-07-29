@@ -5,7 +5,7 @@
 [![SQL](https://img.shields.io/badge/SQL-SQLite-lightgrey?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit&logoColor=white)](https://streamlit.io/)
 
-End-to-end analysis of synthetic patient healthcare data — from relational database design to statistical inference and interactive dashboard, built on the [Synthea](https://synthea.mitre.org/) synthetic patient population simulator.
+End-to-end analysis of synthetic patient healthcare data, from relational database design to statistical inference and interactive dashboard, built on the [Synthea](https://synthea.mitre.org/) synthetic patient population simulator.
 
 ---
 
