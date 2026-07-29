@@ -85,7 +85,7 @@ streamlit run streamlit_app/app.py
 
 ## Notebooks
 
-### `01_exploration.ipynb` — Database Initialisation
+### `01_exploration.ipynb`: Database Initialisation
 
 - Loading raw Synthea CSV files into pandas DataFrames
 - Schema design with primary keys and foreign key constraints (`PRAGMA foreign_keys`)
@@ -93,23 +93,23 @@ streamlit run streamlit_app/app.py
 - Referential integrity verification
 - Exports `patient_pathway.db` (SQLite database)
 
-### `02_sql_analysis.ipynb` — SQL Analysis & Healthcare KPIs
+### `02_sql_analysis.ipynb`: SQL Analysis & Healthcare KPIs
 
 - Cohort description: gender, age distribution, top pathologies
 - Healthcare utilisation: visits per patient, top consumers
 - Multimorbidity analysis: patients with 5+ distinct conditions (`COUNT(DISTINCT)`, `HAVING`)
 - Temporal reconstruction of care pathways using SQL window functions:
-  - `ROW_NUMBER()` — visit chronology per patient
-  - `LAG()` — time elapsed between consecutive visits
-  - `RANK()` — patient ranking by healthcare intensity
+  - `ROW_NUMBER()`: visit chronology per patient
+  - `LAG()`: time elapsed between consecutive visits
+  - `RANK()`: patient ranking by healthcare intensity
 
-### `03_statistical_analysis.ipynb` — Statistical Inference
+### `03_statistical_analysis.ipynb`: Statistical Inference
 
 - Descriptive statistics with normality assessment (mean vs median, outlier detection)
-- **Chi-square test** — gender vs complex chronic status
-- **Mann-Whitney U test** — healthcare utilisation in obese vs non-obese patients (non-parametric, justified by skewed distribution)
-- **Welch t-test** — younger vs older patients (CLT justification for skewed data)
-- **OLS linear regression** — age as continuous predictor of total visits, with residual diagnostic plot (heteroscedasticity assessment)
+- **Chi-square test** (gender vs complex chronic status)
+- **Mann-Whitney U test** (healthcare utilisation in obese vs non-obese patients, non-parametric, justified by skewed distribution)
+- **Welch t-test** (younger vs older patients, CLT justification for skewed data)
+- **OLS linear regression** (age as continuous predictor of total visits, with residual diagnostic plot for heteroscedasticity assessment)
 
 ---
 
@@ -128,10 +128,10 @@ Four tables built from raw Synthea CSV files:
 
 ## Key Findings
 
-- Visit distribution is heavily right-skewed (mean: 58.6 visits, median: 36.0) — a small subset of patients drives a disproportionate share of healthcare consumption
+- Visit distribution is heavily right-skewed (mean: 58.6 visits, median: 36.0): a small subset of patients drives a disproportionate share of healthcare consumption
 - Patients with obesity show significantly higher healthcare utilisation than non-obese patients (Mann-Whitney, p < 0.05)
 - Older patients accumulate significantly more visits than younger patients (Welch t-test, p < 0.05)
-- Age is a statistically significant predictor of visit count but explains only ~12% of variance (R² = 0.122) — clinical phenotype and social determinants play a major role
+- Age is a statistically significant predictor of visit count but explains only ~12% of variance (R² = 0.122); clinical phenotype and social determinants play a major role
 - Gender is not significantly associated with complex chronic status in this synthetic cohort
 
 ---
@@ -181,4 +181,4 @@ Dataset generator: [https://synthea.mitre.org/](https://synthea.mitre.org/)
 
 ## See also
 
-👉 [hospital-readmission-diabetes](https://github.com/juliettebm/hospital-readmission-diabetes) — Predictive modelling for 30-day readmission risk in diabetic patients (Random Forest, scikit-learn, Streamlit)
+👉 [hospital-readmission-diabetes](https://github.com/juliettebm/hospital-readmission-diabetes) : Predictive modelling for 30-day readmission risk in diabetic patients (Random Forest, scikit-learn, Streamlit)
