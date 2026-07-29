@@ -146,7 +146,7 @@ The interactive dashboard provides four modules:
 | Overview          | Cohort KPIs (patients, age, gender, visits)      |
 | Care Pathways     | Visit distribution, top users, chronic patients  |
 | Patient Explorer  | Individual clinical timeline by patient ID       |
-| Statistics        | Chi-square, Mann-Whitney, regression results     |
+| Statistics        | Four independent analyses: chi-square (gender vs. complex chronic status), Mann-Whitney (healthcare utilisation, obese vs. non-obese), Welch t-test (healthcare utilisation, younger vs. older patients), and OLS regression (age as a continuous predictor of visit count) |
 
 ---
 
