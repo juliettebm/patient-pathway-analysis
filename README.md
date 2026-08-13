@@ -168,6 +168,12 @@ Python 3.x · pandas · NumPy · matplotlib · scipy · statsmodels · SQLite ·
 
 ---
 
+## License
+
+Released under the [MIT License](LICENSE). The data is generated with [Synthea](https://synthetichealth.github.io/synthea/) — fully synthetic patient records, no real patient data — and is not tracked by this repository.
+
+---
+
 ## Data Source
 
 Walonoski, J., et al. (2017). *Synthea: An approach, method, and software mechanism for generating synthetic patients and the synthetic electronic health care record.* Journal of the American Medical Informatics Association.
