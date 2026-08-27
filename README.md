@@ -170,7 +170,7 @@ Python 3.x · pandas · NumPy · matplotlib · scipy · statsmodels · SQLite ·
 
 ## License
 
-Released under the [MIT License](LICENSE). The data is generated with [Synthea](https://synthetichealth.github.io/synthea/) — fully synthetic patient records, no real patient data — and is not tracked by this repository.
+Released under the [MIT License](LICENSE). The data is generated with [Synthea](https://synthetichealth.github.io/synthea/), fully synthetic patient records with no real patient data, and is not tracked by this repository.
 
 ---
 
