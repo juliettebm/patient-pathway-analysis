@@ -1,4 +1,4 @@
-# 🏥 Patient Pathway Analysis
+# Patient Pathway Analysis
 
 [![Dataset](https://img.shields.io/badge/Dataset-Synthea%20Synthetic%20Patients-blue?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDJDNy41OCAyIDQgNS41OCA0IDEwczMuNTggOCA4IDggOC0zLjU4IDgtOC0zLjU4LTgtOC04eiIvPjwvc3ZnPg==)](https://synthea.mitre.org/) [![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)](https://www.python.org/) [![SQL](https://img.shields.io/badge/SQL-SQLite-lightgrey?logo=sqlite&logoColor=white)](https://www.sqlite.org/) [![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit&logoColor=white)](https://streamlit.io/)
 
@@ -185,4 +185,4 @@ Dataset generator: <https://synthea.mitre.org/>
 
 ## See also
 
-👉 [hospital-readmission-diabetes](https://github.com/juliettebm/hospital-readmission-diabetes): Predictive modelling for 30-day readmission risk in diabetic patients (Random Forest, scikit-learn, Streamlit)
+[hospital-readmission-diabetes](https://github.com/juliettebm/hospital-readmission-diabetes): Predictive modelling for 30-day readmission risk in diabetic patients (Random Forest, scikit-learn, Streamlit)
