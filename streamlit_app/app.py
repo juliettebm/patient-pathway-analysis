@@ -9,9 +9,9 @@ st.set_page_config(
 st.title("🏥 Patient Pathway Analysis System")
 
 st.markdown("""
-### Clinical Decision Support Dashboard
+### Educational Patient-Pathway Dashboard
 
-This tool analyzes patient healthcare pathways using:
+This synthetic-data demonstrator explores generated patient pathways using:
 
 - SQL relational modeling
 - Healthcare KPIs
@@ -24,7 +24,7 @@ Use the navigation menu on the left to explore the different modules.
 st.sidebar.title("Navigation")
 st.sidebar.info("Select a module above")
 
-st.success("System loaded successfully")
+st.info("Educational use only — not clinically validated and not a decision-support tool.")
 
 st.markdown("---")
 st.caption("Data source: Synthea synthetic health dataset | Educational project")
