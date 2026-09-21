@@ -71,8 +71,12 @@ The tests use a small deterministic synthetic fixture and cover:
 - stable unique row identifiers;
 - row loading, primary keys and foreign-key enforcement;
 - zero-encounter patients retained by `LEFT JOIN`;
-- distinct-condition multimorbidity counting;
-- mutually exclusive obesity comparison groups.
+- distinct chronic-disease-group counting (several labels of one disease count once);
+- mutually exclusive obesity comparison groups;
+- exclusion of non-chronic labels and single counting of multi-label diseases;
+- threshold sensitivity output;
+- Streamlit pages (landing, Overview, Pathways, Patient Explorer, Statistics)
+  executing against a SQLite fixture.
 
 These are software and data-contract tests. They do not validate Synthea as a
 model of clinical reality.
@@ -98,16 +102,26 @@ See the complete field-level [data dictionary](docs/data_dictionary.md).
 ## Analyses
 
 - SQL cohort KPIs, visit counts, multimorbidity and pathway chronology;
-- chi-square check of gender and 5+ distinct conditions;
-- Mann-Whitney comparison of visit counts by generated obesity status;
+- Fisher exact check of gender and multimorbidity (2+ distinct chronic-disease groups);
+- descriptive Mann-Whitney comparison by generated obesity status;
 - Welch comparison across generated age groups;
-- descriptive OLS diagnostic of age and visit count.
+- descriptive OLS diagnostic retained for teaching, not as a primary count model;
+- exploratory negative-binomial GLM with age, encounter-window exposure and death
+  status, plus Holm correction across four prespecified checks.
 
-The 5+ threshold is project-specific: Synthea records dense longitudinal histories,
-so it is used to isolate a smaller complex subgroup. It is not presented as a
-universal clinical definition. Mann-Whitney is used for skewed visit counts and
-Welch's test avoids assuming equal group variance. Statistical significance alone
-is never interpreted as clinical importance.
+Multimorbidity is defined as at least 2 distinct chronic-disease groups, the usual
+literature threshold. Raw Synthea labels are not counted: they mix diagnoses with
+social, administrative and acute entries, and one disease can carry several labels.
+Each label is mapped to a chronic group in `CHRONIC_CONDITION_GROUPS`
+(`src/queries.py`); the list was fixed from label names before any outcome was
+examined and has **not** been reviewed by a clinician. A previous definition (5+ raw
+labels) classified 90% of the cohort as high burden and separated almost nothing.
+On the reference export 667 of 1,146 patients (58.2%) are multimorbid (F 343/563,
+M 324/583). Fisher's exact test is the primary gender comparison (p = 0.072, OR 1.25:
+not significant at 5%; chi-square agrees). The result depends on the threshold
+(p = 0.015 at 1+, 0.59 at 3+), which the Pathways page shows. The
+Mann-Whitney result is unadjusted and the patients are not matched, so it is never
+presented as an obesity effect. Statistical significance is not clinical importance.
 
 ## Project layout
 
@@ -131,6 +145,11 @@ results/                   versioned software-regression snapshot
 - Synthetic-data results do not establish real-world performance or validity.
 - Synthea's rules can directly or indirectly encode the detected associations.
 - P-values shrink with sample size and do not measure effect importance.
+- Encounter counts depend on age, available follow-up and death. The exploratory
+  adjustment cannot eliminate residual confounding or generator bias.
+- OLS assumptions do not suit skewed count outcomes; its output is diagnostic only.
+- The obesity comparison is not matched and does not establish causality.
+- Multiple-testing p-values are reported with a Holm adjustment.
 - The dashboard is educational and is not a medical device or decision aid.
 - Real evaluation would require an independently governed clinical dataset,
   prespecified endpoints, bias assessment and external validation.

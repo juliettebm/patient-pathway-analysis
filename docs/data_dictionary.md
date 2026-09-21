@@ -47,5 +47,6 @@ as ISO-like text in SQLite. Nullable means that the source may omit the value.
 |---|---|
 | `age` | `(as_of_date - birth_date) / 365.25`; dashboard freezes `as_of_date` at 2025-01-01 |
 | `nb_visits` | Count of encounter identifiers, including zero for patients with no encounter |
-| `status` | “Multimorbid” at 5+ distinct condition labels; project-specific threshold |
+| `nb_chronic_groups` | Number of distinct chronic-disease groups a patient has (`CHRONIC_CONDITION_GROUPS` in `src/queries.py`) |
+| `status` | `Multimorbid` at 2+ distinct chronic groups, otherwise `Not multimorbid`; project-specific list, not clinician-reviewed, not a validated definition |
 | `has_obesity` | At least one condition exactly matching Synthea's obesity finding label |

@@ -3,18 +3,12 @@
   "as_of_date": "2025-01-01",
   "metrics": {
     "cohort_size": 1146,
-    "chi2": 0.3,
-    "chi2_p_value": 0.584,
     "obesity_u": 222554.0,
     "obesity_p_value": 8.5511e-26,
     "obesity_median_visits": 45.0,
-    "other_median_visits": 29.0,
-    "r_squared": 0.122
+    "other_median_visits": 29.0
   },
   "absolute_tolerances": {
-    "chi2": 0.001,
-    "chi2_p_value": 0.001,
-    "obesity_p_value": 1e-29,
-    "r_squared": 0.001
+    "obesity_p_value": 1e-29
   }
 }

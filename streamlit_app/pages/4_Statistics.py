@@ -8,7 +8,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.analysis import run_analysis
 from src.db_utils import get_db_connection
-from src.queries import MULTIMORBIDITY
+from src.queries import MULTIMORBIDITY, MULTIMORBIDITY_THRESHOLD
 
 AS_OF_DATE = "2025-01-01"
 conn = get_db_connection()
@@ -22,11 +22,19 @@ st.warning(
 )
 st.caption(f"Ages are frozen at {AS_OF_DATE} so results remain reproducible.")
 
-st.header("1. Gender and multimorbidity")
-st.metric("Chi-square p-value", f"{results.chi2_p_value:.3g}")
-st.info("Pipeline check on generated records only; significance is not clinical evidence.")
+st.header(f"1. Gender and multimorbidity ({MULTIMORBIDITY_THRESHOLD}+ chronic groups)")
+st.metric("Fisher exact p-value", f"{results.fisher_p_value:.3g}")
+st.caption(f"Odds ratio: {results.fisher_odds_ratio:.3g}; multimorbid share: "
+           f"{results.multimorbid_share:.1%}.")
+st.info(
+    "Fisher's exact test is primary because it is exact and does not depend on "
+    "expected counts. The chi-square result is only a diagnostic (minimum expected "
+    f"count {results.minimum_expected_count:.2f}). Multimorbidity counts distinct chronic "
+    "groups from a list fixed before the analysis and not reviewed by a clinician; "
+    "the data are synthetic, so this is not a validated clinical endpoint."
+)
 with st.expander("Observed contingency table"):
-    groups = pd.read_sql(MULTIMORBIDITY, conn, params={"threshold": 5})
+    groups = pd.read_sql(MULTIMORBIDITY, conn, params={"threshold": MULTIMORBIDITY_THRESHOLD})
     st.dataframe(pd.crosstab(groups["gender"], groups["status"]), use_container_width=True)
 
 st.header("2. Healthcare-use comparisons")
@@ -55,4 +63,19 @@ with right:
         f"**{results.r_squared * 100:.1f}%** of variance. This is descriptive, "
         "non-causal and has no demonstrated external validity."
     )
+
+st.header("4. Exploratory adjusted count model")
+st.metric("Adjusted obesity rate ratio", f"{results.adjusted_obesity_rate_ratio:.3f}")
+st.caption(
+    "Negative-binomial GLM adjusted for age at censoring, observed encounter-window "
+    "duration and death status. This partial adjustment does not make groups equivalent, "
+    "remove synthetic-generator bias or support a causal obesity effect."
+)
+st.write(f"Raw p-value: {results.adjusted_obesity_p_value:.3g}")
+st.write("Holm-adjusted p-values across the four prespecified checks:",
+         results.holm_adjusted_p_values)
+st.warning(
+    "The unadjusted Mann-Whitney comparison is descriptive: patients are not matched, "
+    "age and follow-up differ, and obesity may be recorded later in life."
+)
 conn.close()

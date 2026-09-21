@@ -5,6 +5,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for `src`
 from src.db_utils import get_db_connection
+from src.queries import ANALYSIS_DATE
 
 conn = get_db_connection()
 
@@ -16,8 +17,8 @@ st.title("📊 Cohort Overview")
 nb_patients = pd.read_sql("SELECT COUNT(*) AS n FROM patients", conn).iloc[0,0]
 
 avg_age = pd.read_sql("""
-    SELECT AVG((julianday('now') - julianday(birth_date))/365.25) FROM patients
-""", conn).iloc[0,0]
+    SELECT AVG((julianday(:as_of_date) - julianday(birth_date))/365.25) FROM patients
+""", conn, params={"as_of_date": ANALYSIS_DATE}).iloc[0,0]
 
 avg_visits = pd.read_sql("""
     SELECT AVG(nb_visits)
@@ -47,9 +48,9 @@ with col_right:
     st.markdown("### ⏳ Structure d'âge")
     # Extraction des âges
     age_df = pd.read_sql("""
-        SELECT (julianday('now') - julianday(birth_date))/365.25 AS age
+        SELECT (julianday(:as_of_date) - julianday(birth_date))/365.25 AS age
         FROM patients
-    """, conn)
+    """, conn, params={"as_of_date": ANALYSIS_DATE})
     # Création d'un histogramme propre par tranches de 10 ans
     age_counts = pd.cut(
         age_df["age"], 
